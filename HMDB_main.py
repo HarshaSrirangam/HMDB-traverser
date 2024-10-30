@@ -4,11 +4,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from HMDB_config import Candidate
-from HMDB_config import LOCATORS
-from HMDB_config import SEARCH_PARAMS as SP
+from HMDB_config import Candidate, LOCATORS, SEARCH_PARAMS as SP
 import time
-
 
 
 def locate(driver, element):
@@ -19,7 +16,6 @@ def locate(driver, element):
         EC.element_to_be_clickable((method, path))
     )
     return elem
-    
 
 
 def select(driver, element):
@@ -62,9 +58,7 @@ def tolerance_search(driver, tolerance):
     tolerance_input = locate(driver, LOCATORS['tolerance'])
     tolerance_input.clear()
     enter_text(driver, LOCATORS['tolerance'], tolerance)
-    time.sleep(1)
     select(driver, LOCATORS['search_button'])
-    time.sleep(1)
 
 
 def dynamic_search(driver, tolerance, upper_bound=5, lower_bound=1):
@@ -95,27 +89,8 @@ def dynamic_search(driver, tolerance, upper_bound=5, lower_bound=1):
             tolerance_search(driver, best_tolerance)
 
 
-desired_statuses = [
-    "detected and quantified",
-    "detected but not quantified",
-    "expected but not quantified",
-    "predicted"
-]
-candidates = []
-terminal_candidates = []
-
-try:
-    service = Service(ChromeDriverManager().install())
-    current_driver = webdriver.Chrome(service=service)
-    current_driver.get(SP['URL'])
-
-    entries = initial_search(current_driver, SP['mz_value'], SP['initial_tolerance'])
-    if entries > SP['upper_bound'] or entries < SP['lower_bound']:
-        dynamic_search(current_driver, SP['initial_tolerance'], SP['upper_bound'], SP['lower_bound'])
-
-    final_entries = get_number_of_entries(current_driver)
-    select(current_driver, LOCATORS['max_page_entries'])
-
+def traverse_candidates(current_driver, final_entries):
+    candidates = []
     for i in range(final_entries):
         entry_xpath = LOCATORS['entry_link'][1].format(i + 1)
         entry_locator = (By.XPATH, entry_xpath)
@@ -133,24 +108,53 @@ try:
         candidates.append(candidate)
         current_driver.back()
         time.sleep(1)
-except Exception as e:
-    print('Search failed. Ensure stable connection and try again.')
-finally:
-    current_driver.quit()
+    return candidates
 
-for status in desired_statuses:
-    terminal_candidates.extend([cand for cand in candidates if cand.STATUS.lower() == status])
-    if terminal_candidates:
-        break
 
-if terminal_candidates and terminal_candidates[0].STATUS != 'detected and quantified':
-        print('\nThe following compound(s) are {terminal_candidates[0].STATUS}')
-for i in range(len(terminal_candidates)):
-    current_candidate = terminal_candidates[i]
-    print(f'\n'
-          f'Compound {i + 1}:\n'
-          f'Name: {current_candidate.COMMON_NAME}\n'
-          f'Class: {current_candidate.CLASS}\n'
-          f'HMDB ID: {current_candidate.HMDB_ID}\n'
-          f'SMILES: {current_candidate.SMILES}\n'
-          f'Chemical formula: {current_candidate.CHEMICAL_FORMULA}\n')
+def results(initial_candidates, statuses):
+    final_compounds = []
+    for status in statuses:
+        final_compounds.extend([cand for cand in initial_candidates if cand.STATUS.lower() == status])
+        if final_compounds:
+            break
+
+    if final_compounds and final_compounds[0].STATUS != 'detected and quantified':
+        print(f'\nThe following compound(s) are {final_compounds[0].STATUS.lower()}')
+    for i, current_candidate in enumerate(final_compounds):
+        print(f'\n'
+              f'Compound {i + 1}:\n'
+              f'Name: {current_candidate.COMMON_NAME}\n'
+              f'Class: {current_candidate.CLASS}\n'
+              f'HMDB ID: {current_candidate.HMDB_ID}\n'
+              f'SMILES: {current_candidate.SMILES}\n'
+              f'Chemical formula: {current_candidate.CHEMICAL_FORMULA}\n')
+
+
+desired_statuses = [
+    'detected and quantified',
+    'detected but not quantified',
+    'expected but not quantified',
+    'predicted'
+]
+
+if __name__ == '__main__':
+    try:
+        service = Service(ChromeDriverManager().install())
+        current_driver = webdriver.Chrome(service=service)
+        current_driver.get(SP['URL'])
+
+        entries = initial_search(current_driver, SP['mz_value'], SP['initial_tolerance'])
+        if entries > SP['upper_bound'] or entries < SP['lower_bound']:
+            dynamic_search(current_driver, SP['initial_tolerance'], SP['upper_bound'], SP['lower_bound'])
+
+        final_entries = get_number_of_entries(current_driver)
+        if final_entries > 0:
+            select(current_driver, LOCATORS['max_page_entries'])
+            initial_candidates = traverse_candidates(current_driver, final_entries)
+            results(initial_candidates, desired_statuses)
+        else:
+            print("No entries found.")
+    except Exception:
+        print(f'Search failed. Ensure stable connection and try again.')
+    finally:
+        current_driver.quit()
