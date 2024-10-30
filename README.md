@@ -1,4 +1,4 @@
-HMDB-Traverser Version 1: A tool for matching mass spectrometry data to metabolites in the Human Metabolome Database (HMDB).
+HMDB-Traverser Version 1: A tool for matching mass spectrometry data to metabolites via the Human Metabolome Database (HMDB).
 
 Features:
 LC-MS Search Metabolite Matching
