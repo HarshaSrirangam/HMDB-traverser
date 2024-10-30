@@ -8,17 +8,14 @@ class Candidate:
         self.CLASS = clas
         self.CHEMICAL_FORMULA = formula
 
-#  [locator method, locator value] -> HTML CONTENT OF DATABASE
 LOCATORS = {
-    #initial search
     'mass': ['By.ID', 'query_masses'],
-    'ion_mode': ['By.XPATH', '//*[@id="ms_search_ion_mode"]/option[1]'], # should support all ion modes
-    'adduct_type': ['By.XPATH', '//*[@id="adduct_type"]/option[2]'], # should support all adduct types
+    'ion_mode': ['By.XPATH', '//*[@id="ms_search_ion_mode"]/option[1]'], 
+    'adduct_type': ['By.XPATH', '//*[@id="adduct_type"]/option[2]'],
     'tolerance': ['By.ID', 'tolerance'],
     'search_button': ['By.NAME', 'commit'],
     'entry_table': ['By.CLASS_NAME', 'ms-search-table'],
     'alternate_search_button': ['By.CSS_SELECTOR', 'a.btn.btn-primary[aria-controls=".specdb-search-form"]'],
-    # after searching has completed
     'max_page_entries': ['By.XPATH', '//*[@id="DataTables_Table_0_length"]/label/select/option[4]'],
     'entry_link': ['By.XPATH', '//*[@id="DataTables_Table_0"]/tbody/tr[{}]/td[1]/a'],
     'entry_info_page_confirmation': ['By.XPATH', '//*[@id="identification"]/th'],
