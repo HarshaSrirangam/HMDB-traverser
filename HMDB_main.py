@@ -66,7 +66,6 @@ def dynamic_search(driver, tolerance, upper_bound=5, lower_bound=1):
     best_tolerance = temp_tolerance
     best_entries = 100
     iteration = 1
-
     for _ in range(10):
         tolerance_search(driver, temp_tolerance)
         ent = get_number_of_entries(driver)
@@ -76,7 +75,6 @@ def dynamic_search(driver, tolerance, upper_bound=5, lower_bound=1):
         if ent < best_entries and ent != 0:
             best_entries = ent
             best_tolerance = temp_tolerance
-
         if ent > upper_bound:
             temp_tolerance = pow(temp_tolerance, 10 / 9)
             temp_tolerance = round(temp_tolerance, 4)
@@ -84,7 +82,6 @@ def dynamic_search(driver, tolerance, upper_bound=5, lower_bound=1):
             temp_tolerance = pow(temp_tolerance, 10 / 11)
             temp_tolerance = round(temp_tolerance, 4)
         iteration += 1
-
         if iteration > 10:
             tolerance_search(driver, best_tolerance)
 
