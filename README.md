@@ -5,7 +5,7 @@ This is a Python-based software that automates mass spectrometry data to metabol
 ## **Requirements**
 - Latest version of Python 
 - Selenium and webdriver-manager installed via pip
-- Latest version of Google Chrome, Edge, or Firefox
+- Latest version of Google Chrome, Firefox, or Microsoft Edge
 
 ## **Instructions to Use**
 1. Download all files from this folder.
