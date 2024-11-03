@@ -1,6 +1,5 @@
 
-elements = {
-    # search param elements
+elements = { # null -> element does not have options; value of 'null' key is the element's HTML locator
     'm/z': {
         'find_by': 'By.ID',
         'null': 'query_masses'
@@ -25,7 +24,30 @@ elements = {
         'M+K': '//*[@id="adduct_type"]/option[10]',
         'M+ACN+H': '//*[@id="adduct_type"]/option[11]',
         'M+2Na-H': '//*[@id="adduct_type"]/option[12]',
-        'M+DMSO+H': '//*[@id="adduct_type"]/option[13]', # ADD OTHERS
+        'M+DMSO+H': '//*[@id="adduct_type"]/option[13]',
+        'M+2ACN+H': '//*[@id="adduct_type"]/option[14]',
+        'M+IsoProp+Na+H': '//*[@id="adduct_type"]/option[15]',
+        'M+H+HCOONa': '//*[@id="adduct_type"]/option[16]',
+        '2M+H': '//*[@id="adduct_type"]/option[17]',
+        '2M+NH4': '//*[@id="adduct_type"]/option[18]',
+        '2M+Na': '//*[@id="adduct_type"]/option[19]',
+        '2M+2H+3H2O': '//*[@id="adduct_type"]/option[20]',
+        '2M+ACN+H': '//*[@id="adduct_type"]/option[21]',
+        '2M+ACN+Na': '//*[@id="adduct_type"]/option[22]',
+        '2M+H-H2O': '//*[@id="adduct_type"]/option[23]',
+        'M+2H': '//*[@id="adduct_type"]/option[24]',
+        'M+H+NH4': '//*[@id="adduct_type"]/option[25]',
+        'M+H+Na': '//*[@id="adduct_type"]/option[26]',
+        'M+H+K': '//*[@id="adduct_type"]/option[26]',
+        'M+ACN+2H': '//*[@id="adduct_type"]/option[27]',
+        'M+2Na': '//*[@id="adduct_type"]/option[28]',
+        'M+2ACN+2H': '//*[@id="adduct_type"]/option[29]',
+        'M+3ACN+2H': '//*[@id="adduct_type"]/option[30]',
+        'M+3H': '//*[@id="adduct_type"]/option[31]',
+        'M+2H+Na': '//*[@id="adduct_type"]/option[32]',
+        'M+H+2Na': '//*[@id="adduct_type"]/option[33]',
+        'M+3Na': '//*[@id="adduct_type"]/option[34]',
+        'M+H+2K': '//*[@id="adduct_type"]/option[35]'
     },
     'tolerance': {
         'find_by': 'By.ID',
