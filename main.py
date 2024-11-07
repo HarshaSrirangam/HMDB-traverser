@@ -3,7 +3,7 @@ from utils import results
 from driver_setup import initialize_headed_driver, initialize_headless_driver, quit_driver
 
 
-if __name__name == '__main__':
+if __name__ == '__main__':
     try:
         current_driver = initialize_headless_driver() # initialize driver
         entries = primary_search(current_driver) # search for compounds
