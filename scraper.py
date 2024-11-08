@@ -24,15 +24,15 @@ def enter_text(driver, element, method, text):
 
 
 def primary_search(driver):
-   enter_text(driver, elements['m/z']['null'], elements['m/z']['find_by'], SP['user_m/z'])
-   select(driver, elements['ion_mode'][SP['user_ion_mode']], elements['ion_mode']['find_by'])
-   select(driver, elements['adduct_type'][SP['user_adduct_type']], elements['adduct_type']['find_by'])
-   select(driver, elements['ccs_prediction_method'][SP['user_ccs_prediction_method']], elements['ccs_prediction_method']['find_by'])
-   select(driver, elements['collision_cross_section_tolerance'][SP['user_collision_cross_section_tolerance']], elements['collision_cross_section_tolerance']['find_by'])
-   enter_text(driver, elements['tolerance']['null'], elements['tolerance']['find_by'], SP['user_initial_tolerance'])
-   select(driver, elements['search_button']['null'], elements['search_button']['find_by'])
-   return get_number_of_entries(driver)
-
+    enter_text(driver, elements['m/z']['null'], elements['m/z']['find_by'], SP['user_m/z'])
+    select(driver, elements['ion_mode'][SP['user_ion_mode']], elements['ion_mode']['find_by'])
+    select(driver, elements['adduct_type'][SP['user_adduct_type']], elements['adduct_type']['find_by'])
+    select(driver, elements['ccs_prediction_method'][SP['user_ccs_prediction_method']], elements['ccs_prediction_method']['find_by'])
+    select(driver, elements['collision_cross_section_tolerance'][SP['user_collision_cross_section_tolerance']], elements['collision_cross_section_tolerance']['find_by'])
+    enter_text(driver, elements['tolerance']['null'], elements['tolerance']['find_by'], SP['user_initial_tolerance'])
+    select(driver, elements['search_button']['null'], elements['search_button']['find_by'])
+    return get_number_of_entries(driver)
+    
 
 def get_number_of_entries(driver):
     try:
