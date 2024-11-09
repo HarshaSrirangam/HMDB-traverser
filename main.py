@@ -6,7 +6,7 @@ from driver_setup import initialize_headed_driver, initialize_headless_driver, q
 if __name__ == '__main__':
     try:
 <<<<<<< HEAD
-        current_driver = initialize_headed_driver() # initialize driver
+        current_driver = initialize_headless_driver() # initialize driver
 =======
         current_driver = initialize_headless_driver() # initialize driver
 >>>>>>> 363d3478d27657c435c3811762b02d6efb49c562
