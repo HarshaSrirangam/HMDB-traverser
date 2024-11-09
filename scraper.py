@@ -24,7 +24,10 @@ def enter_text(driver, element, method, text):
 
 
 def primary_search(driver):
+<<<<<<< HEAD
     print('searching...')
+=======
+>>>>>>> 363d3478d27657c435c3811762b02d6efb49c562
     enter_text(driver, elements['m/z']['null'], elements['m/z']['find_by'], SP['user_m/z'])
     select(driver, elements['ion_mode'][SP['user_ion_mode']], elements['ion_mode']['find_by'])
     select(driver, elements['adduct_type'][SP['user_adduct_type']], elements['adduct_type']['find_by'])
@@ -33,8 +36,13 @@ def primary_search(driver):
     enter_text(driver, elements['tolerance']['null'], elements['tolerance']['find_by'], SP['user_initial_tolerance'])
     select(driver, elements['search_button']['null'], elements['search_button']['find_by'])
     return get_number_of_entries(driver)
+<<<<<<< HEAD
 
 
+=======
+    
+
+>>>>>>> 363d3478d27657c435c3811762b02d6efb49c562
 def get_number_of_entries(driver):
     try:
 

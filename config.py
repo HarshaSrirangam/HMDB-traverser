@@ -115,4 +115,8 @@ SEARCH_PARAMS = {
     'upper_bound': 3,
     'lower_bound': 1,
     'URL': 'https://hmdb.ca/spectra/ms/search'
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 363d3478d27657c435c3811762b02d6efb49c562
