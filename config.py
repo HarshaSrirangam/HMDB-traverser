@@ -106,17 +106,13 @@ elements = { # null -> element does not have options; value of 'null' key is the
 
 
 SEARCH_PARAMS = {
-    'user_m/z': 292,
-    'user_ion_mode': 'positive',
+    'user_m/z': 292, # m/z value (mass)
+    'user_ion_mode': 'positive', 
     'user_adduct_type': 'M+H',
     'user_ccs_prediction_method': 'blank',
     'user_collision_cross_section_tolerance': 'blank',
-    'user_initial_tolerance': 0.03,
+    'user_initial_tolerance': 0.05,
     'upper_bound': 3,
     'lower_bound': 1,
     'URL': 'https://hmdb.ca/spectra/ms/search'
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 363d3478d27657c435c3811762b02d6efb49c562
