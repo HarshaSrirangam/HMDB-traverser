@@ -53,6 +53,21 @@ elements = { # null -> element does not have options; value of 'null' key is the
         'find_by': 'By.ID',
         'null': 'tolerance'
     },
+   'ccs_prediction_method': {
+        'find_by': 'By.XPATH',
+        'blank': '//*[@id="ccs_predictors"]/option[1]',
+        'AllCCS': '//*[@id="ccs_predictors"]/option[2]',
+        'DarkChem': '//*[@id="ccs_predictors"]/option[3]',
+        'DeepCCS': '//*[@id="ccs_predictors"]/option[4]'
+   },
+   'collision_cross_section_tolerance': {
+        'find_by': 'By.XPATH',
+        'blank': '//*[@id="ccs_tolerance"]/option[1]',
+        '1': '//*[@id="ccs_tolerance"]/option[2]',
+        '3': '//*[@id="ccs_tolerance"]/option[3]',
+        '5': '//*[@id="ccs_tolerance"]/option[4]',
+        '10': '//*[@id="ccs_tolerance"]/option[5]',
+   },
     'search_button': {
         'find_by': 'By.NAME',
         'null': 'commit'
@@ -67,17 +82,17 @@ elements = { # null -> element does not have options; value of 'null' key is the
     },
     'max_page_entries': {
         'find_by': 'By.XPATH',
-        'null': '//*[@id="DataTables_Table_0_length"]/label/select/option[4]' # has options, but always select option 4
+        'null': '//*[@id="DataTables_Table_0_length"]/label/select/option[4]' 
     },
     'entry_link': {
         'find_by': 'By.XPATH',
-        'null': '//*[@id="DataTables_Table_0"]/tbody/tr[{}]/td[1]/a' # has options, but seperate function will traverse compounds
+        'null': '//*[@id="DataTables_Table_0"]/tbody/tr[{}]/td[1]/a' 
     },
-    'entry_info_page_confirmation': { # ensures page has loaded before extracting compound info
+    'entry_info_page_confirmation': { 
         'find_by': 'By.XPATH',
         'null': '//*[@id="identification"]/th'
     },
-    'compound_info': { # compound information for extraction
+    'compound_info': { 
         'find_by': 'By.XPATH',
         'status': "/html/body/main/table/tbody[1]/tr[3]/td",
         'hmdb_id': "/html/body/main/table/tbody[1]/tr[6]/td",
@@ -89,17 +104,15 @@ elements = { # null -> element does not have options; value of 'null' key is the
         }
     }
 
- # ADD OTHER 3 PARAMATERS AND ALL ADDUCT TYPES
-
 
 SEARCH_PARAMS = {
-    'user_m/z': 292.0708,
+    'user_m/z': 292,
     'user_ion_mode': 'positive',
     'user_adduct_type': 'M+H',
-    'user_initial_tolerance': 0.05,
+    'user_ccs_prediction_method': 'blank',
+    'user_collision_cross_section_tolerance': 'blank',
+    'user_initial_tolerance': 0.03,
     'upper_bound': 3,
     'lower_bound': 1,
     'URL': 'https://hmdb.ca/spectra/ms/search'
 }
-
-

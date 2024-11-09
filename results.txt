@@ -1,0 +1,16 @@
+
+The following compound(s) are detected but not quantified
+
+Compound 1:
+Name: Tifenazoxide
+Class: Thiophenes
+HMDB ID: HMDB0259083
+SMILES: CC1(CC1)N=C1NC2=C(SC(Cl)=C2)S(=O)(=O)N1
+Chemical formula: C9H10ClN3O2S2
+
+Compound 2:
+Name: 2-Iodo-l-phenylalanine
+Class: Carboxylic acids and derivatives
+HMDB ID: HMDB0245177
+SMILES: NC(CC1=CC=CC=C1I)C(O)=O
+Chemical formula: C9H10INO2

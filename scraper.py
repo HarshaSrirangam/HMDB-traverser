@@ -24,15 +24,18 @@ def enter_text(driver, element, method, text):
 
 
 def primary_search(driver):
-   enter_text(driver, elements['m/z']['null'], elements['m/z']['find_by'], SP['user_m/z'])
-   select(driver, elements['ion_mode'][SP['user_ion_mode']], elements['ion_mode']['find_by'])
-   select(driver, elements['adduct_type'][SP['user_adduct_type']], elements['adduct_type']['find_by'])
-   enter_text(driver, elements['tolerance']['null'], elements['tolerance']['find_by'], SP['user_initial_tolerance'])
-   select(driver, elements['search_button']['null'], elements['search_button']['find_by'])
-   return get_number_of_entries(driver)
+    print('searching...')
+    enter_text(driver, elements['m/z']['null'], elements['m/z']['find_by'], SP['user_m/z'])
+    select(driver, elements['ion_mode'][SP['user_ion_mode']], elements['ion_mode']['find_by'])
+    select(driver, elements['adduct_type'][SP['user_adduct_type']], elements['adduct_type']['find_by'])
+    select(driver, elements['ccs_prediction_method'][SP['user_ccs_prediction_method']], elements['ccs_prediction_method']['find_by'])
+    select(driver, elements['collision_cross_section_tolerance'][SP['user_collision_cross_section_tolerance']], elements['collision_cross_section_tolerance']['find_by'])
+    enter_text(driver, elements['tolerance']['null'], elements['tolerance']['find_by'], SP['user_initial_tolerance'])
+    select(driver, elements['search_button']['null'], elements['search_button']['find_by'])
+    return get_number_of_entries(driver)
 
 
-def get_number_of_entries(driver): # does not call config.py because of cryptic html locators
+def get_number_of_entries(driver):
     try:
 
         alert = WebDriverWait(driver, 20).until(
@@ -46,7 +49,7 @@ def get_number_of_entries(driver): # does not call config.py because of cryptic 
             ).text
             entries = entries.split()
             return int(entries[5])
-        except Exception as e:
+        except Exception:
             return
 
 
@@ -58,11 +61,12 @@ def tolerance_search(driver, dummy_tolerance):
 
 
 def dynamic_search(driver, incoming_entries):
+    print('adjusting candidates...')
     upper_bound = SP['upper_bound']
     lower_bound = SP['lower_bound']
     if lower_bound <= incoming_entries <= upper_bound:
         return
-    temp_tolerance = SP['user_initial_tolerance'] # make dynamic initially
+    temp_tolerance = SP['user_initial_tolerance']
     best_tolerance = temp_tolerance
     best_entries = 100
     iteration = 1
@@ -87,8 +91,9 @@ def dynamic_search(driver, incoming_entries):
 
 
 def traverse_candidates(driver):
+    print('traversing candidates...')
     final_entries = get_number_of_entries(driver)
-    common_locate_method = elements['compound_info']['find_by'] # locate method is constant for pieces of compound info
+    common_locate_method = elements['compound_info']['find_by']
     candidates = []
     for i in range(final_entries):
         current_compound = elements['entry_link']['null'].format(i + 1)

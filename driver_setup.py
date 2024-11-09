@@ -5,10 +5,10 @@ from selenium.webdriver.chrome.options import Options
 from config import SEARCH_PARAMS as SP
 
 def initialize_headed_driver(): 
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service)
-        driver.get(SP['URL'])
-        return driver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+    driver.get(SP['URL'])
+    return driver
         
 
 def initialize_headless_driver():
